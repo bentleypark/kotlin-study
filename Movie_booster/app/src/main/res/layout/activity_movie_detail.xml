@@ -1,0 +1,486 @@
+<?xml version="1.0" encoding="utf-8"?>
+<layout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools">
+
+    <data>
+        <variable
+            name="viewmodel"
+            type="com.bentley.movie.SavedStateViewModel" />
+
+    </data>
+
+
+<androidx.core.widget.NestedScrollView
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:fillViewport="true"
+    tools:context=".MovieDetailActivity">
+
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent">
+
+
+        <!--첫번째 레이아웃-->
+        <androidx.constraintlayout.widget.ConstraintLayout
+            android:id="@+id/movie_layout_1"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:background="@drawable/backgroundgradient"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent">
+            <!--영화 포스터-->
+            <ImageView
+                android:id="@+id/iv_movie_poster"
+                android:layout_width="180dp"
+                android:layout_height="230dp"
+                android:layout_marginStart="8dp"
+                android:layout_marginTop="8dp"
+                android:layout_marginBottom="8dp"
+                android:scaleType="centerCrop"
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toTopOf="parent"
+                app:srcCompat="@drawable/poster" />
+            <!--영화 타이틀-->
+            <TextView
+                android:id="@+id/tv_movie_title"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="20dp"
+                android:layout_marginTop="84dp"
+                android:text="@string/movieTitle"
+                android:textColor="@android:color/white"
+                android:textSize="30sp"
+                android:textStyle="bold"
+                app:layout_constraintStart_toEndOf="@+id/iv_movie_poster"
+                app:layout_constraintTop_toTopOf="parent" />
+            <!--영화 등급-->
+            <ImageView
+                android:id="@+id/iv_movie_grade"
+                android:layout_width="40dp"
+                android:layout_height="40dp"
+                android:layout_marginStart="20dp"
+                app:layout_constraintBottom_toBottomOf="@+id/tv_movie_title"
+                app:layout_constraintStart_toEndOf="@+id/tv_movie_title"
+                app:layout_constraintTop_toTopOf="@+id/tv_movie_title"
+                app:srcCompat="@drawable/ic_15" />
+            <!--영화 개봉날짜-->
+            <TextView
+                android:id="@+id/tv_movie_date"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="15dp"
+                android:text="@string/movieOpenDate"
+                android:textColor="@android:color/white"
+                android:textSize="20sp"
+                app:layout_constraintStart_toStartOf="@+id/tv_movie_title"
+                app:layout_constraintTop_toBottomOf="@+id/tv_movie_title" />
+            <!--영화 기타 정보-->
+            <TextView
+                android:id="@+id/tv_movie_info"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="15dp"
+                android:text="@string/movieInfo"
+                android:textColor="@android:color/white"
+                android:textSize="20sp"
+                app:layout_constraintStart_toStartOf="@+id/tv_movie_date"
+                app:layout_constraintTop_toBottomOf="@+id/tv_movie_date" />
+            <!--좋아요 아이콘-->
+            <ImageView
+                android:id="@+id/iv_thumb_up"
+                android:layout_width="30dp"
+                android:layout_height="30dp"
+                android:layout_marginTop="24dp"
+                android:layout_marginBottom="24dp"
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintStart_toStartOf="@+id/tv_movie_info"
+                app:layout_constraintTop_toBottomOf="@+id/tv_movie_info"
+                android:background="@drawable/thumb_up_selector" />
+            <!--좋아요 갯수-->
+            <TextView
+                android:id="@+id/tv_countOf_thumb_up"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="8dp"
+                android:text="@{viewmodel.thumbUpValue}"
+                android:textColor="@android:color/white"
+                android:textSize="20sp"
+                android:textStyle="bold"
+                app:layout_constraintStart_toEndOf="@+id/iv_thumb_up"
+                app:layout_constraintTop_toTopOf="@+id/iv_thumb_up" />
+            <!--싫어요 아이콘-->
+            <ImageView
+                android:id="@+id/iv_thumb_down"
+                android:layout_width="30dp"
+                android:layout_height="30dp"
+                android:layout_marginStart="24dp"
+                app:layout_constraintStart_toEndOf="@+id/tv_countOf_thumb_up"
+                app:layout_constraintTop_toTopOf="@+id/tv_countOf_thumb_up"
+                app:srcCompat="@drawable/thumb_down_selector" />
+            <!--싫어요 갯수-->
+            <TextView
+                android:id="@+id/tv_countOf_thumb_down"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="8dp"
+                android:text="@string/countOfThumbDown"
+                android:textColor="@android:color/white"
+                android:textSize="20sp"
+                android:textStyle="bold"
+                app:layout_constraintStart_toEndOf="@+id/iv_thumb_down"
+                app:layout_constraintTop_toTopOf="@+id/iv_thumb_down" />
+        </androidx.constraintlayout.widget.ConstraintLayout>
+        <!--두번째 레이아웃-->
+        <LinearLayout
+            android:id="@+id/movie_layout_2"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:baselineAligned="false"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/movie_layout_1">
+
+            <androidx.constraintlayout.widget.ConstraintLayout
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_weight="1">
+                <!--예매율-->
+                <TextView
+                    android:id="@+id/tv_reservation_ratio_title"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginStart="8dp"
+                    android:layout_marginTop="16dp"
+                    android:layout_marginEnd="8dp"
+                    android:text="@string/ratioOfReservation"
+                    android:textSize="18sp"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toTopOf="parent" />
+
+                <TextView
+                    android:id="@+id/tv_reservation_rank"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="8dp"
+                    android:text="@string/reservationRankValue"
+                    android:textSize="15sp"
+                    android:textStyle="bold"
+                    app:layout_constraintBottom_toBottomOf="parent"
+                    app:layout_constraintStart_toStartOf="@+id/tv_reservation_ratio_title"
+                    app:layout_constraintTop_toBottomOf="@+id/tv_reservation_ratio_title" />
+
+                <TextView
+                    android:id="@+id/tv_reservation_ratio_percent"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginStart="12dp"
+                    android:text="@string/reservationPercentValue"
+                    android:textSize="15sp"
+                    android:textStyle="bold"
+                    app:layout_constraintStart_toEndOf="@+id/tv_reservation_rank"
+                    app:layout_constraintTop_toTopOf="@+id/tv_reservation_rank" />
+
+            </androidx.constraintlayout.widget.ConstraintLayout>
+
+            <View
+                android:layout_width="2dp"
+                android:layout_height="100dp"
+                android:background="@android:color/darker_gray" />
+
+            <androidx.constraintlayout.widget.ConstraintLayout
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_weight="1">
+                <!--평점-->
+                <TextView
+                    android:id="@+id/tv_evaluation_title"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginStart="8dp"
+                    android:layout_marginTop="16dp"
+                    android:layout_marginEnd="8dp"
+                    android:text="@string/evaluation"
+                    android:textSize="18sp"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toTopOf="parent" />
+
+                <RatingBar
+                    android:id="@+id/ratingBar"
+                    style="@android:style/Widget.DeviceDefault.RatingBar.Small"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="8dp"
+                    android:layout_marginEnd="28dp"
+                    android:numStars="5"
+                    android:rating="4"
+                    android:stepSize="1"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toBottomOf="@+id/tv_evaluation_title" />
+
+                <TextView
+                    android:id="@+id/tv_evaluation_point"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginStart="4dp"
+                    android:text="@string/evaluationPointValue"
+                    android:textSize="15sp"
+                    android:textStyle="bold"
+                    app:layout_constraintStart_toEndOf="@+id/ratingBar"
+                    app:layout_constraintTop_toTopOf="@+id/ratingBar" />
+            </androidx.constraintlayout.widget.ConstraintLayout>
+
+            <View
+                android:layout_width="2dp"
+                android:layout_height="100dp"
+                android:background="@android:color/darker_gray" />
+            <androidx.constraintlayout.widget.ConstraintLayout
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_weight="1">
+                <!--누적관객수-->
+                <TextView
+                    android:id="@+id/tv_audience_count"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginStart="8dp"
+                    android:layout_marginTop="16dp"
+                    android:layout_marginEnd="8dp"
+                    android:text="@string/audienceCount"
+                    android:textSize="18sp"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toTopOf="parent" />
+
+                <TextView
+                    android:id="@+id/textView9"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginStart="8dp"
+                    android:layout_marginTop="16dp"
+                    android:text="@string/countOfAudience"
+                    android:textSize="15sp"
+                    android:textStyle="bold"
+                    app:layout_constraintStart_toStartOf="@+id/tv_audience_count"
+                    app:layout_constraintTop_toBottomOf="@+id/tv_audience_count" />
+
+            </androidx.constraintlayout.widget.ConstraintLayout>
+        </LinearLayout>
+        <!--세번째 레이아웃: 경계선-->
+        <View
+            android:id="@+id/movie_layout_3"
+            android:layout_width="match_parent"
+            android:layout_height="15dp"
+            android:background="@color/gray"
+            android:baselineAligned="false"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/movie_layout_2" />
+
+        <!--네번째 레이아웃-->
+        <LinearLayout
+            android:id="@+id/movie_layout_4"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:baselineAligned="false"
+            android:orientation="vertical"
+            android:padding="10dp"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/movie_layout_3">
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="@string/storyTitle"
+                android:textColor="@android:color/black"
+                android:textSize="18sp"
+                android:textStyle="bold" />
+
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="20dp"
+                android:text="@string/storyContent" />
+        </LinearLayout>
+
+        <!--다번째 레이아웃: 경계선-->
+        <View
+            android:id="@+id/movie_layout_5"
+            android:layout_width="match_parent"
+            android:layout_height="15dp"
+            android:background="@color/gray"
+            android:baselineAligned="false"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/movie_layout_4" />
+
+        <!--여섯번째 레이아웃-->
+        <RelativeLayout
+            android:id="@+id/movie_layout_6"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:baselineAligned="false"
+            android:orientation="vertical"
+            android:padding="10dp"
+            app:layout_constraintTop_toBottomOf="@+id/movie_layout_5">
+            <!--영화감독-->
+            <TextView
+                android:id="@+id/tv_movie_director_title"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="@string/movieDirectorTitle"
+                android:textColor="@android:color/black"
+                android:textSize="18sp" />
+
+            <TextView
+                android:id="@+id/tv_movie_director_name"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="10dp"
+                android:layout_toEndOf="@+id/tv_movie_director_title"
+                android:text="@string/directorNameValue"
+                android:textSize="18sp" />
+            <!--배우-->
+            <TextView
+                android:id="@+id/tv_movie_actor_title"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_below="@+id/tv_movie_director_title"
+                android:layout_marginTop="15dp"
+                android:text="@string/movie_actor_title"
+                android:textColor="@android:color/black"
+                android:textSize="18sp" />
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_below="@+id/tv_movie_director_name"
+                android:layout_marginStart="10dp"
+                android:layout_marginTop="15dp"
+                android:layout_toEndOf="@+id/tv_movie_actor_title"
+                android:text="@string/actorNameValue"
+                android:textSize="18sp" />
+        </RelativeLayout>
+        <!--칠곱번째 레이아웃: 경계선-->
+        <View
+            android:id="@+id/movie_layout_7"
+            android:layout_width="match_parent"
+            android:layout_height="15dp"
+            android:background="@color/gray"
+            android:baselineAligned="false"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/movie_layout_6" />
+        <!--여덟번째 레이아웃-->
+        <LinearLayout
+            android:id="@+id/movie_layout_8"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="vertical"
+            app:layout_constraintTop_toBottomOf="@+id/movie_layout_7">
+
+            <RelativeLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="20dp"
+                android:padding="10dp">
+                <!--한줄평-->
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_alignParentStart="true"
+                    android:text="@string/oneLineCommentTitle"
+                    android:textColor="@android:color/black"
+                    android:textSize="18sp"
+                    android:textStyle="bold" />
+
+                <ImageView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_alignParentTop="true"
+                    android:layout_marginTop="4dp"
+                    android:layout_marginEnd="10dp"
+                    android:layout_toStartOf="@+id/tv_review"
+                    android:src="@drawable/ic_review_selected" />
+
+                <TextView
+                    android:id="@+id/tv_review"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_alignParentEnd="true"
+                    android:layout_marginEnd="15dp"
+                    android:text="@string/writeCommentTitle"
+                    android:textColor="@android:color/holo_red_dark"
+                    android:textSize="18sp"
+                    android:textStyle="bold" />
+            </RelativeLayout>
+
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="200dp"/>
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content">
+
+                <Button
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_margin="10dp"
+                    android:background="@drawable/buttonborder"
+                    android:text="@string/seeAllTitle"
+                    android:textSize="18sp" />
+
+            </LinearLayout>
+        </LinearLayout>
+        <!--아홉번째 레이아웃-->
+        <LinearLayout
+            android:id="@+id/movie_layout_9"
+            android:layout_width="match_parent"
+            android:layout_height="18dp"
+            android:background="@color/gray"
+            android:baselineAligned="false"
+            android:orientation="vertical"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/movie_layout_8" />
+
+        <LinearLayout
+            android:id="@+id/movie_layout_10"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:padding="20dp"
+            app:layout_constraintTop_toBottomOf="@+id/movie_layout_9">
+
+            <ImageView
+                android:layout_width="50dp"
+                android:layout_height="50dp"
+                android:src="@drawable/ic_facebook" />
+
+            <ImageView
+                android:layout_width="50dp"
+                android:layout_height="50dp"
+                android:layout_marginStart="15dp"
+                android:src="@drawable/ic_kakao" />
+
+            <Button
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="15dp"
+                android:layout_marginEnd="10dp"
+                android:background="@android:color/holo_red_dark"
+                android:text="@string/doReservation"
+                android:textColor="@android:color/white"
+                android:textSize="20sp"
+                android:textStyle="bold" />
+        </LinearLayout>
+    </androidx.constraintlayout.widget.ConstraintLayout>
+</androidx.core.widget.NestedScrollView>
+</layout>

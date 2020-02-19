@@ -1,0 +1,25 @@
+<resources>
+    <string name="app_name">씨네마천국</string>
+    <string name="movieTitle">군도</string>
+    <string name="movieOpenDate">2014.07.23 개봉</string>
+    <string name="movieInfo">액션 / 137분</string>
+    <string name="ratioOfReservation">예매율</string>
+    <string name="evaluation">평점</string>
+    <string name="audienceCount">누적관객수</string>
+    <string name="storyTitle">줄거리</string>
+    <string name="storyContent">군도, 백성을 구하라  양반과 탐관오리들의 착취가 극에 달했던 조선 철종 13년\n힘 없는 백성의 편이 되어 세상을 바로잡고자 하는 의적떼인\n군도(群盜), 지리산 추설이 있었다.\n\n쌍칼 도치 vs 백성의 적 조윤\n잦은 자연재해, 기극과 관의 횡포까지 겹쳐 백성들의 삶이\n날로 피폐해 져 가는 사이, 나주 대부호의 서자로 조선\n최고의 무관 출신인 조윤은 극악한 수법으로 양민들을 수탈</string>
+    <string name="movieDirectorTitle">감독</string>
+    <string name="movie_actor_title">배우</string>
+    <string name="oneLineCommentTitle">한줄평</string>
+    <string name="writeCommentTitle">작성하기</string>
+    <string name="seeAllTitle">모두 보기</string>
+    <string name="doReservation">예매하기</string>
+    <string name="countOfThumbUp">15</string>
+    <string name="countOfThumbDown">1</string>
+    <string name="reservationRankValue">5위</string>
+    <string name="reservationPercentValue">1.8%</string>
+    <string name="evaluationPointValue">8.2</string>
+    <string name="countOfAudience">839,399명</string>
+    <string name="actorNameValue">하정우(도치), 강동원(조윤)</string>
+    <string name="directorNameValue">윤종빈</string>
+</resources>
