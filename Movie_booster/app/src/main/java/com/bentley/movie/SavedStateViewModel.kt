@@ -8,28 +8,34 @@ import androidx.lifecycle.ViewModel
 class SavedStateViewModel(private var state: SavedStateHandle) : ViewModel() {
 
 
-//    private val _thumbUpValue: MutableLiveData<Int> = state.getLiveData(THUMB_UP_KeY)
-//    val thumbUpValue: LiveData<Int>
-//        get() = _thumbUpValue
-//
-//    private val _thumbDownValue: MutableLiveData<Int> = state.getLiveData(THUMB_DOWN_KeY)
-//    val thumbDownValue: LiveData<Int>
-//        get() = _thumbDownValue
+    private val _thumbUpValue: MutableLiveData<String> = getThumUpValue()
+    val thumbUpValue: LiveData<String>
+        get() = _thumbUpValue
+
+    private val _thumbDownValue: MutableLiveData<String> = getThumDownValue()
+    val thumbDownValue: LiveData<String>
+        get() = _thumbDownValue
 
     companion object {
         private val THUMB_UP_KeY = "thumb_up"
         private val THUMB_DOWN_KeY = "thumb_down"
     }
 
+    init {
+        _thumbUpValue.value = 3.toString()
+        _thumbDownValue.value = 1.toString()
+
+    }
+
     fun SavedStateViewModel(savedStateHandle: SavedStateHandle) {
         state = savedStateHandle
     }
 
-    fun getThumUpValue(): LiveData<Int> = state.getLiveData(THUMB_UP_KeY)
+    fun getThumUpValue(): MutableLiveData<String> = state.getLiveData<String>(THUMB_UP_KeY)
 
-    fun saveThumUpValue(value: Int) = state.set(THUMB_UP_KeY, value)
+    fun saveThumUpValue(value: Int) = state.set(THUMB_UP_KeY, value.toString())
 
-    fun getThumDownValue(): LiveData<Int> = state.getLiveData(THUMB_DOWN_KeY)
+    fun getThumDownValue(): MutableLiveData<String> = state.getLiveData<String>(THUMB_DOWN_KeY)
 
-    fun saveThumDownValue(value: Int) = state.set(THUMB_DOWN_KeY, value)
+    fun saveThumDownValue(value: Int) = state.set(THUMB_DOWN_KeY, value.toString())
 }
