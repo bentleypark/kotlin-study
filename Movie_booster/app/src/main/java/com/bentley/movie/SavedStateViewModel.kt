@@ -8,13 +8,13 @@ import androidx.lifecycle.ViewModel
 class SavedStateViewModel(private var state: SavedStateHandle) : ViewModel() {
 
 
-    private val _thumbUpValue: MutableLiveData<Int> = state.getLiveData(THUMB_UP_KeY)
-    val thumbUpValue: LiveData<Int>
-        get() = _thumbUpValue
-
-    private val _thumbDownValue: MutableLiveData<Int> = state.getLiveData(THUMB_DOWN_KeY)
-    val thumbDownValue: LiveData<Int>
-        get() = _thumbDownValue
+//    private val _thumbUpValue: MutableLiveData<Int> = state.getLiveData(THUMB_UP_KeY)
+//    val thumbUpValue: LiveData<Int>
+//        get() = _thumbUpValue
+//
+//    private val _thumbDownValue: MutableLiveData<Int> = state.getLiveData(THUMB_DOWN_KeY)
+//    val thumbDownValue: LiveData<Int>
+//        get() = _thumbDownValue
 
     companion object {
         private val THUMB_UP_KeY = "thumb_up"

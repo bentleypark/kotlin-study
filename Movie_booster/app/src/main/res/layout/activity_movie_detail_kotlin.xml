@@ -1,21 +1,12 @@
 <?xml version="1.0" encoding="utf-8"?>
-<layout xmlns:android="http://schemas.android.com/apk/res/android"
+<androidx.core.widget.NestedScrollView xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
-    xmlns:tools="http://schemas.android.com/tools">
-
-    <data>
-        <variable
-            name="viewmodel"
-            type="com.bentley.movie.SavedStateViewModel" />
-
-    </data>
-
-
-<androidx.core.widget.NestedScrollView
+    xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
     android:fillViewport="true"
-    tools:context=".MovieDetailActivity">
+    tools:context=".MovieDetailActivityKotlin"
+    >
 
     <androidx.constraintlayout.widget.ConstraintLayout
         android:layout_width="match_parent"
@@ -99,14 +90,14 @@
                 app:layout_constraintBottom_toBottomOf="parent"
                 app:layout_constraintStart_toStartOf="@+id/tv_movie_info"
                 app:layout_constraintTop_toBottomOf="@+id/tv_movie_info"
-                android:background="@drawable/thumb_up_selector" />
+                app:srcCompat="@drawable/ic_thumb_up" />
             <!--좋아요 갯수-->
             <TextView
                 android:id="@+id/tv_countOf_thumb_up"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_marginStart="8dp"
-                android:text="@{viewmodel.thumbUpValue}"
+                android:text="@string/countOfThumbUp"
                 android:textColor="@android:color/white"
                 android:textSize="20sp"
                 android:textStyle="bold"
@@ -120,7 +111,7 @@
                 android:layout_marginStart="24dp"
                 app:layout_constraintStart_toEndOf="@+id/tv_countOf_thumb_up"
                 app:layout_constraintTop_toTopOf="@+id/tv_countOf_thumb_up"
-                app:srcCompat="@drawable/thumb_down_selector" />
+                app:srcCompat="@drawable/ic_thumb_down" />
             <!--싫어요 갯수-->
             <TextView
                 android:id="@+id/tv_countOf_thumb_down"
@@ -483,4 +474,3 @@
         </LinearLayout>
     </androidx.constraintlayout.widget.ConstraintLayout>
 </androidx.core.widget.NestedScrollView>
-</layout>
