@@ -2,40 +2,25 @@ package com.bentley.movie
 
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
-import androidx.lifecycle.SavedStateHandle
 import androidx.lifecycle.ViewModel
 
-class SavedStateViewModel(private var state: SavedStateHandle) : ViewModel() {
+class SavedStateViewModel : ViewModel() {
 
 
-    private val _thumbUpValue: MutableLiveData<String> = getThumUpValue()
+    private val _thumbUpValue: MutableLiveData<String> = MutableLiveData("3")
     val thumbUpValue: LiveData<String>
         get() = _thumbUpValue
 
-    private val _thumbDownValue: MutableLiveData<String> = getThumDownValue()
+    private val _thumbDownValue: MutableLiveData<String> = MutableLiveData("1")
     val thumbDownValue: LiveData<String>
         get() = _thumbDownValue
 
-    companion object {
-        private val THUMB_UP_KeY = "thumb_up"
-        private val THUMB_DOWN_KeY = "thumb_down"
+
+    fun saveThumUpValue(value: Int) {
+        _thumbUpValue.value = value.toString()
     }
 
-    init {
-        _thumbUpValue.value = 3.toString()
-        _thumbDownValue.value = 1.toString()
-
+    fun saveThumDownValue(value: Int) {
+        _thumbDownValue.value = value.toString()
     }
-
-    fun SavedStateViewModel(savedStateHandle: SavedStateHandle) {
-        state = savedStateHandle
-    }
-
-    fun getThumUpValue(): MutableLiveData<String> = state.getLiveData<String>(THUMB_UP_KeY)
-
-    fun saveThumUpValue(value: Int) = state.set(THUMB_UP_KeY, value.toString())
-
-    fun getThumDownValue(): MutableLiveData<String> = state.getLiveData<String>(THUMB_DOWN_KeY)
-
-    fun saveThumDownValue(value: Int) = state.set(THUMB_DOWN_KeY, value.toString())
 }
