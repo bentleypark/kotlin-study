@@ -98,6 +98,7 @@
                 app:layout_constraintStart_toStartOf="@+id/tv_movie_info"
                 app:layout_constraintTop_toBottomOf="@+id/tv_movie_info"
                 android:background="@drawable/thumb_up_selector"
+                status="@{viewmodel.thumbUpStatus}"
                  />
             <!--좋아요 갯수-->
             <TextView
@@ -119,7 +120,8 @@
                 android:layout_marginStart="24dp"
                 app:layout_constraintStart_toEndOf="@+id/tv_countOf_thumb_up"
                 app:layout_constraintTop_toTopOf="@+id/tv_countOf_thumb_up"
-                android:background="@drawable/thumb_down_selector" />
+                android:background="@drawable/thumb_down_selector"
+                status="@{viewmodel.thumbDownStatus}"/>
             <!--싫어요 갯수-->
             <TextView
                 android:id="@+id/tv_countOf_thumb_down"

@@ -5,7 +5,12 @@ import android.widget.ImageButton
 import android.widget.Toast
 import androidx.appcompat.app.AppCompatActivity
 import androidx.databinding.DataBindingUtil
+import androidx.lifecycle.SavedStateViewModelFactory
 import androidx.lifecycle.ViewModelProvider
+import com.bentley.movie.SavedStateViewModel.Companion.thumbDownStatusKey
+import com.bentley.movie.SavedStateViewModel.Companion.thumbDownValueKey
+import com.bentley.movie.SavedStateViewModel.Companion.thumbUpStatuskey
+import com.bentley.movie.SavedStateViewModel.Companion.thumbUpValueKey
 import com.bentley.movie.databinding.ActivityMovieDetailKotlinBinding
 import kotlinx.android.synthetic.main.activity_movie_detail_kotlin.*
 
@@ -28,8 +33,21 @@ class MovieDetailActivityKotlin : AppCompatActivity() {
         }
     }
 
+    override fun onSaveInstanceState(outState: Bundle) {
+        if (::viewModel.isInitialized)
+            viewModel.saveState()
+
+        super.onSaveInstanceState(outState)
+    }
+
     private fun setUpViewModel() {
-        viewModel = ViewModelProvider(this).get(SavedStateViewModel::class.java)
+        val defaultState = Bundle().apply {
+            putInt(thumbUpValueKey, 3)
+            putBoolean(thumbUpStatuskey, false)
+            putInt(thumbDownValueKey, 1)
+            putBoolean(thumbDownStatusKey, false)
+        }
+        viewModel = ViewModelProvider(this, SavedStateViewModelFactory(application, this, defaultState)).get(SavedStateViewModel::class.java)
         activityMovieDetailKotlinBinding = DataBindingUtil.setContentView(this, R.layout.activity_movie_detail_kotlin)
         activityMovieDetailKotlinBinding.lifecycleOwner = this
         activityMovieDetailKotlinBinding.viewmodel = viewModel
@@ -37,29 +55,34 @@ class MovieDetailActivityKotlin : AppCompatActivity() {
 
     private fun setUpButtonSelector() {
         iv_thumb_up.setOnClickListener {
-            Toast.makeText(this, "test", Toast.LENGTH_SHORT).show()
             iv_thumb_up.isSelected = !iv_thumb_up.isSelected
+            viewModel.saveThumUpStatus(iv_thumb_up.isSelected)
 
-            val thumbUpValue = viewModel.thumbUpValue.value?.toInt()
-            val thumbDownValue = viewModel.thumbDownValue.value?.toInt()
+
+            val thumbUpValue = viewModel.thumbUpValue.value
+            val thumbDownValue = viewModel.thumbDownValue.value
 
             when (iv_thumb_up.isSelected) {
                 true -> {
                     viewModel.saveThumUpValue(thumbUpValue!!.plus(1))
                     if (iv_thumb_down.isSelected) {
                         iv_thumb_down.isSelected = false
+                        viewModel.saveThumDownStatus(false)
                         viewModel.saveThumDownValue(thumbDownValue!!.minus(1))
                     }
                 }
-                false -> viewModel.saveThumUpValue(thumbUpValue!!.minus(1))
+                false ->{
+                    viewModel.saveThumUpValue(thumbUpValue!!.minus(1))
+                }
             }
         }
 
         iv_thumb_down.setOnClickListener {
             iv_thumb_down.isSelected = !iv_thumb_down.isSelected
+            viewModel.saveThumDownStatus(iv_thumb_down.isSelected)
 
-            val thumbUpValue = viewModel.thumbUpValue.value?.toInt()
-            val thumbDownValue = viewModel.thumbDownValue.value?.toInt()
+            val thumbUpValue = viewModel.thumbUpValue.value
+            val thumbDownValue = viewModel.thumbDownValue.value
 
             when (iv_thumb_down.isSelected) {
 
@@ -67,6 +90,7 @@ class MovieDetailActivityKotlin : AppCompatActivity() {
                     viewModel.saveThumDownValue(thumbDownValue!!.plus(1))
                     if (iv_thumb_up.isSelected) {
                         iv_thumb_up.isSelected = false
+                        viewModel.saveThumUpStatus(false)
                         viewModel.saveThumUpValue(thumbUpValue!!.minus(1))
                     }
                 }
